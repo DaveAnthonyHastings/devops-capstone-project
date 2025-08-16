@@ -50,84 +50,40 @@ def create_accounts():
     account.deserialize(request.get_json())
     account.create()
     message = account.serialize()
-    location_url = url_for("get_accounts", account_id=account.id, _external=True)
+    # Uncomment once get_accounts has been implemented
+    # location_url = url_for("get_accounts", account_id=account.id, _external=True)
+    location_url = "/"  # Remove once get_accounts has been implemented
     return make_response(
         jsonify(message), status.HTTP_201_CREATED, {"Location": location_url}
     )
 
-
 ######################################################################
 # LIST ALL ACCOUNTS
 ######################################################################
-@app.route("/accounts", methods=["GET"])
-def get_accounts():
-    """
-    Returns list of all available Accounts
-    This endpoint will return a list of all Accounts from database
-    """
-    app.logger.info("Request to read all Accounts")
 
-    accounts = Account.all()
-    results = [account.serialize() for account in accounts]
-
-    app.logger.info("Returning [%s] accounts", len(results))
-    return jsonify(results), status.HTTP_200_OK
+# ... place you code here to LIST accounts ...
 
 
 ######################################################################
 # READ AN ACCOUNT
 ######################################################################
-@app.route("/accounts/<int:account_id>", methods=["GET"])
-def get_account(account_id):
-    """
-    Returns Account data by given ID
-    This endpoint will return status 404 Not Found if given ID does not exist
-    """
-    app.logger.info("Request to read Account with ID [%s]", account_id)
 
-    account = Account.find(account_id)
-    if not account:
-        abort(status.HTTP_404_NOT_FOUND, f"Account with id '{account_id}' was not found.")
-
-    return account.serialize(), status.HTTP_200_OK
+# ... place you code here to READ an account ...
 
 
 ######################################################################
 # UPDATE AN EXISTING ACCOUNT
 ######################################################################
-@app.route("/accounts/<int:account_id>", methods=["PUT"])
-def update_account(account_id):
-    """
-    Updates Account
-    This endpoint will update an existing Account based on the data that was sent in request body
-    For unknown Account ID returns 404 Not Found
-    """
-    app.logger.info("Request to update Account with id [%s]", account_id)
 
-    account = Account.find(account_id)
-    if not account:
-        abort(status.HTTP_404_NOT_FOUND, f"Account with id '{account_id}' was not found.")
-
-    account.deserialize(request.get_json())
-    account.update()
-
-    return account.serialize(), status.HTTP_200_OK
+# ... place you code here to UPDATE an account ...
 
 
 ######################################################################
 # DELETE AN ACCOUNT
 ######################################################################
-@app.route("/accounts/<int:account_id>", methods=["DELETE"])
-def delete_account(account_id):
-    """
-    Delete an Account
-    This endpoint will delete an Account based the id specified in the path
-    """
-    app.logger.info("Request to Delete an Account with id [%s]", account_id)
-    account = Account.find(account_id)
-    if account:
-        account.delete()
-    return "", status.HTTP_204_NO_CONTENT
+
+# ... place you code here to DELETE an account ...
+
 
 ######################################################################
 #  U T I L I T Y   F U N C T I O N S
