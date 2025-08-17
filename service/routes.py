@@ -11,7 +11,7 @@ from . import app  # Import Flask application
 
 
 ############################################################
-# Health Endpoint
+# Health Endpoints
 ############################################################
 
 
